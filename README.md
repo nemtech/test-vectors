@@ -7,9 +7,19 @@ sufixes:
  - `nis1` == NIS1 / catapult pub
  - `catapult` == CATAPULT priv
 
-* 1.test-keys-[suffix] - deriviation of public key from private key
-* 1.test-address-[suffix] - deriviation of addresses in all networks from public key - CATAPULT priv
-* 2.test-sign-[suffix].dat - ed25519 ECDSA signing
-* 3.test-derive-[suffix].dat - shared key deriviation
+* 1.test-keys-[SUFFIX] - deriviation of public key from private key
+  * `KeyPair("privateKey").publicKey` == "publicKey"
+* 1.test-address-[SUFFIX] - deriviation of addresses in all networks from public key - CATAPULT priv
+  * `AddressToString(PublicKeyToAddress("publicKey", Public))` == "address\_public"
+  * `AddressToString(PublicKeyToAddress("publicKey", Public_Test))` == "address\_public\_test"
+  * `AddressToString(PublicKeyToAddress("publicKey", Mijin))` == "address\_mijin"
+  * `AddressToString(PublicKeyToAddress("publicKey", Mijin_Test))` == "address\_mijin\_test"
+* 2.test-sign-[SUFFIX].dat - ed25519 ECDSA signing
+  * `KeyPair("privateKey").publicKey` == "publicKey"
+  * `Sign(keyPair, "data", "length")` == "signature"
+* 3.test-derive-[SUFFIX].dat - shared key deriviation
+  * `keyPair := KeyPair("privateKey")`
+  * `DeriveSharedKey(keyPair, "otherPublicKey", "salt")` == "sharedKey"
+  * scalarMulResult is an intermediate scalar multiplication result, prior to salting, can be ignored in most tests
 * 4.test-cipher.dat - AEC-CBC encryption with IV
 
