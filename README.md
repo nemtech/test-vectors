@@ -22,4 +22,7 @@ sufixes:
   * `DeriveSharedKey(keyPair, "otherPublicKey", "salt")` == "sharedKey"
   * scalarMulResult is an intermediate scalar multiplication result, prior to salting, can be ignored in most tests
 * 4.test-cipher.dat - AEC-CBC encryption with IV
+  * `keyPair := KeyPair("privateKey")`
+  * `sharedKey` := `DeriveSharedKey(keyPair, "otherPublicKey", "salt")`
+  * "clearText" == `AesCbcDecrypt(sharedKey, "iv" || "cipherText")`
 
