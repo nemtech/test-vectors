@@ -17,10 +17,10 @@
   * `keyPair := KeyPair("privateKey")`
   * `DeriveSharedKey(keyPair, "otherPublicKey")` == "sharedKey"
   * scalarMulResult is an intermediate scalar multiplication result, prior to salting, can be ignored in most tests
-* 4.test-cipher - AEC-CBC encryption with IV
+* 4.test-cipher - AES256 GCM encryption with IV
   * `keyPair := KeyPair("privateKey")`
   * `sharedKey` := `DeriveSharedKey(keyPair, "otherPublicKey")`
-  * `AesCbcDecrypt(sharedKey, "iv" || "cipherText")` == "clearText"
+  * `AesGcm256::TryDecrypt(sharedKey, "tag" || "iv" || "cipherText")` == "clearText"
 * 5.test-mosaic-id - SHA3 256 mosaic id derivation
   * `GenerateMosaicId("address_Public, mosaicNonce")` == "mosaicId\_Public"
   * `GenerateMosaicId("address_PublicTest, mosaicNonce")` == "mosaicId\_PublicTest"
